@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">HttpTest</string>
+    <string name="title_activity_block_view">BlockView</string>
+
+    <string name="title_activity_block">BlockActivity</string>
+    <string name="driverlog_login">DriverLog Login!</string>
+    <string name="blocks">blocks</string>
+    <string name="expenses">expenses</string>
+    <string name="profileTitle">User Profile</string>
+    <string name="userName" >Username</string>
+    <string name="logout">logout</string>
+    <string name="block_view">Block View</string>
+</resources>
