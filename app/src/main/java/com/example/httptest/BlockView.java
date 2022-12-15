@@ -28,10 +28,9 @@ public class BlockView extends OptionsMenu {
         setContentView(R.layout.activity_block_view);
 
         BlockControl bc = new BlockControl();
-        ListView l;
 
 
-        if(bc.flag == true){
+        if(bc.flag){
             HttpStreamControl hsc = new HttpStreamControl();
              // may have to check if returned
             JSONObject r = hsc.getJsonResult();
@@ -39,12 +38,12 @@ public class BlockView extends OptionsMenu {
             // returns json
             try {
                 // jsonarray
-                ArrayList<String> al = new ArrayList<String>();
+                ArrayList<String> al = new ArrayList<>();
                 JSONArray blocks = r.getJSONArray("blocks");
                 System.out.println("blockview " + blocks.length());
                 int end = blocks.length();
                 //
-                String line = null;
+                String line;
                 for (int i = 0; i < end; i++) {
                     line = blocks.get(i).toString();
                     System.out.println("jsonarrayline "+ line);
@@ -60,8 +59,8 @@ public class BlockView extends OptionsMenu {
 
                 System.out.println("arraylist blockview "+ al);
                 ArrayAdapter<String> listAdapter =
-                        new ArrayAdapter<String>(this, R.layout.simplerow, al);
-                ListView blocklist = (ListView) findViewById(R.id.block_list);
+                        new ArrayAdapter<>(this, R.layout.simplerow, al);
+                ListView blocklist = findViewById(R.id.block_list);
                 blocklist.setAdapter(listAdapter);
                 
             } catch (JSONException e) {
