@@ -1,26 +1,14 @@
 package com.example.httptest;
 
 import android.os.Bundle;
-import android.util.JsonReader;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
-
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class BlockView extends OptionsMenu {
-
-    private ResultParser rp;
-    private JSONObject temp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +19,9 @@ public class BlockView extends OptionsMenu {
 
 
         if(bc.flag){
-            HttpStreamControl hsc = new HttpStreamControl();
+
              // may have to check if returned
-            JSONObject r = hsc.getJsonResult();
+            JSONObject r = HttpStreamControl.getJsonResult();
             System.out.println("blockview flag = true ");
             // returns json
             try {
@@ -47,7 +35,7 @@ public class BlockView extends OptionsMenu {
                 for (int i = 0; i < end; i++) {
                     line = blocks.get(i).toString();
                     System.out.println("jsonarrayline "+ line);
-                    JSONObject temp = new JSONObject(line);
+                    //JSONObject temp = new JSONObject(line);
                     // produces a set of keys
 //                    Iterator keys = temp.keys();
 //                    while (keys.hasNext()){
