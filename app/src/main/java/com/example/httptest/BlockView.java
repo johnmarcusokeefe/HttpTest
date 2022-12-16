@@ -16,7 +16,7 @@ public class BlockView extends OptionsMenu {
         setContentView(R.layout.activity_block_view);
 
         BlockControl bc = new BlockControl();
-
+        // update to recyclerview
 
         if(bc.flag){
 
