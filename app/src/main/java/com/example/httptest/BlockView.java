@@ -2,7 +2,10 @@ package com.example.httptest;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -10,16 +13,21 @@ import java.util.ArrayList;
 
 public class BlockView extends OptionsMenu {
 
+    // initiate row variables
+    TextView blockId;
+    TextView blockDate;
+    TextView blockRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_block_view);
+        //setContentView(R.layout.activity_block_view);
+
+
 
         BlockControl bc = new BlockControl();
 
-
         if(bc.flag){
-
              // may have to check if returned
             JSONObject r = HttpStreamControl.getJsonResult();
             System.out.println("blockview flag = true ");
@@ -46,10 +54,19 @@ public class BlockView extends OptionsMenu {
                 }
 
                 System.out.println("arraylist blockview "+ al);
-                ArrayAdapter<String> listAdapter =
-                        new ArrayAdapter<>(this, R.layout.simplerow, al);
-                ListView blocklist = findViewById(R.id.block_list);
-                blocklist.setAdapter(listAdapter);
+
+                blockId = findViewById(R.id.block_id);
+                blockDate = findViewById(R.id.block_date);
+                blockRef = findViewById(R.id.block_ref);
+
+                
+
+//                ArrayAdapter<String> listAdapter =
+//                        new ArrayAdapter<>(this, R.layout.activity_block_row, al);
+//
+//
+//                ListView blocklist = findViewById(R.id.block_list);
+                //blocklist.setAdapter(listAdapter);
                 
             } catch (JSONException e) {
                 e.printStackTrace();
