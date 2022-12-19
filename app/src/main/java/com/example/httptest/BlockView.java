@@ -1,12 +1,19 @@
 package com.example.httptest;
 
 import android.os.Bundle;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.ListAdapter;
+import androidx.recyclerview.widget.RecyclerView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
+import java.util.List;
 
 public class BlockView extends OptionsMenu {
 
@@ -16,17 +23,14 @@ public class BlockView extends OptionsMenu {
         setContentView(R.layout.activity_block_view);
 
         BlockControl bc = new BlockControl();
-
-
+        
         if(bc.flag){
-
              // may have to check if returned
             JSONObject r = HttpStreamControl.getJsonResult();
-            System.out.println("blockview flag = true ");
             // returns json
             try {
                 // jsonarray
-                ArrayList<String> al = new ArrayList<>();
+                List<Block> blockItem = new ArrayList<>();
                 JSONArray blocks = r.getJSONArray("blocks");
                 System.out.println("blockview " + blocks.length());
                 int end = blocks.length();
@@ -34,22 +38,16 @@ public class BlockView extends OptionsMenu {
                 String line;
                 for (int i = 0; i < end; i++) {
                     line = blocks.get(i).toString();
-                    System.out.println("jsonarrayline "+ line);
-                    //JSONObject temp = new JSONObject(line);
-                    // produces a set of keys
-//                    Iterator keys = temp.keys();
-//                    while (keys.hasNext()){
-//                        System.out.println("temp keys "+ keys.next().toString());
-//                    }
-                    //System.out.println("jsonarraydate "+ temp.get("date"));
-                    al.add(line);
+                    // jsonarrayline {"id":"1","date":"2022-11-01","job":"Job Identifier"}
+                    JSONObject jsonLine = new JSONObject(line);
+                    // create instance of block
+                    Block newBlock = new Block();
+                    newBlock.setId(jsonLine.get("id").toString());
+                    newBlock.setDate(jsonLine.get("date").toString());
+                    newBlock.setJob(jsonLine.get("job").toString());
+                    blockItem.add(newBlock);
                 }
-
-                System.out.println("arraylist blockview "+ al);
-                ArrayAdapter<String> listAdapter =
-                        new ArrayAdapter<>(this, R.layout.simplerow, al);
-                ListView blocklist = findViewById(R.id.block_list);
-                blocklist.setAdapter(listAdapter);
+                //
                 
             } catch (JSONException e) {
                 e.printStackTrace();

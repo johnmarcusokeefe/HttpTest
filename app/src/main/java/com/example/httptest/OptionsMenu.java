@@ -29,6 +29,7 @@ public class OptionsMenu extends AppCompatActivity {
             System.out.println("r.id.blocks");
             BlockView bv = new BlockView();
             createView(bv.getClass(), lc.get_token());
+
         }
         if( menu.getItemId() == R.id.expenses) {
             System.out.println("r.id.expense");
