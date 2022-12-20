@@ -6,6 +6,12 @@ public class Block {
     private String date;
     private String job;
 
+    public Block() {
+        this.id=id;
+        this.date=date;
+        this.job=job;
+    }
+
     public Block(String id, String date, String job ) {
         this.id=id;
         this.date=date;
