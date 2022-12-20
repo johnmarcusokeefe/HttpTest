@@ -1,6 +1,7 @@
 package com.example.httptest;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,9 +23,8 @@ import java.util.List;
 
 public class BlockView extends OptionsMenu {
 
-    ListView listView;
-    List<Block> blockList;
-    Activity context;
+    private ListView listView;
+    private List<Block> blockList;
 
     public BlockView() {
     }
@@ -62,10 +62,6 @@ public class BlockView extends OptionsMenu {
                     newBlock.setJob(jsonLine.get("job").toString());
                     blockList.add(newBlock);
                 }
-                // ???
-                ListView list;
-                list=(ListView)findViewById(R.id.block_list);
-                getView(0, list, listView);
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -73,23 +69,6 @@ public class BlockView extends OptionsMenu {
         }
 
 
-
-    }
-// example code takes black record and sets the text for one activity
-    public View getView(int position, View view, ViewGroup parent){
-
-        LayoutInflater inflater=context.getLayoutInflater();
-        View rowView=inflater.inflate(R.layout.activity_block_view, null,true);
-
-        TextView id = (TextView) view.findViewById(R.id.block_id);
-        TextView date = (TextView) view.findViewById(R.id.block_id);
-        TextView job = (TextView) view.findViewById(R.id.block_id);
-
-        id.setText(blockList.get(position).getId());
-        date.setText(blockList.get(position).getDate());
-        job.setText(blockList.get(position).getJob());
-
-        return rowView;
 
     }
 
