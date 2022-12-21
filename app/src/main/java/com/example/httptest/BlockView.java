@@ -1,5 +1,7 @@
 package com.example.httptest;
 
+import static com.example.httptest.R.id.block_list;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -24,7 +26,7 @@ import java.util.List;
 public class BlockView extends OptionsMenu {
 
     private ListView listView;
-    private List<Block> blockList;
+    private ArrayList<Block> blockList;
 
     public BlockView() {
     }
@@ -34,7 +36,7 @@ public class BlockView extends OptionsMenu {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_block_view);
 
-        listView=(ListView)findViewById(R.id.block_list);
+        listView=findViewById(block_list);
         BlockControl bc = new BlockControl();
         
         if(bc.flag){
@@ -62,6 +64,12 @@ public class BlockView extends OptionsMenu {
                     newBlock.setJob(jsonLine.get("job").toString());
                     blockList.add(newBlock);
                 }
+                //
+
+                BlockAdapter blockAdapter = new BlockAdapter(this, blockList);
+                listView.setAdapter(blockAdapter);
+
+
 
             } catch (JSONException e) {
                 e.printStackTrace();

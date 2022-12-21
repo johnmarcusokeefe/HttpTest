@@ -24,7 +24,11 @@ public class BlockAdapter extends ArrayAdapter<Block> {
     public View getView(int position, @Nullable View viewItem, @NonNull ViewGroup viewGroup) {
 
         if(viewItem==null){
+
             Block block = getItem(position);
+            System.out.println(position + block.getDate());
+
+            viewItem = LayoutInflater.from(getContext()).inflate(R.layout.activity_block_view_item, viewGroup, false);
 
             TextView id = viewItem.findViewById(R.id.block_id);
             TextView date = viewItem.findViewById(R.id.block_date);
