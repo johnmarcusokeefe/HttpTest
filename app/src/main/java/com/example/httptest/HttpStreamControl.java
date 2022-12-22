@@ -11,7 +11,6 @@ public class HttpStreamControl extends Thread {
 
     private static String POST_DATA;
     private static String url_string;
-    private static URL url;
     private HttpsURLConnection httpConnection;
     ResultParser lr;
     private static JSONObject jsonResult;
@@ -27,11 +26,11 @@ public class HttpStreamControl extends Thread {
     public static Boolean httpRequest(String url_in) {
         LoginControl lc = new LoginControl();
         String token = lc.get_token();
-        System.out.println("httpstreamget token "+token);
         POST_DATA = ("token="+token);
         url_string = url_in;
         HttpStreamControl thread = new HttpStreamControl();
         thread.start();
+
         while(thread.isAlive()){
             System.out.println("getting data");
         }
@@ -41,7 +40,7 @@ public class HttpStreamControl extends Thread {
     public void run() {
         try {
             System.out.println("run "+url_string);
-            url = new URL(url_string);
+            URL url = new URL(url_string);
             httpConnection = (HttpsURLConnection) url.openConnection();
             httpConnection.setRequestMethod("POST");
             httpConnection.setDoOutput(true);
@@ -52,11 +51,8 @@ public class HttpStreamControl extends Thread {
             // get response
             InputStream in = new BufferedInputStream(httpConnection.getInputStream());
             // parses the data
-
             lr = new ResultParser();
             JSONObject object = lr.resultParser(in);
-            System.out.println("httpstream "+lr);
-
             setJsonResult(object);
 
         } catch (Exception e) {

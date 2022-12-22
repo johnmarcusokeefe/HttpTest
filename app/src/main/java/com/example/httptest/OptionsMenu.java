@@ -27,6 +27,7 @@ public class OptionsMenu extends AppCompatActivity {
         }
         if( menu.getItemId() == R.id.blocks) {
             System.out.println("r.id.blocks");
+
             BlockView bv = new BlockView();
             createView(bv.getClass(), lc.get_token());
 
@@ -45,7 +46,7 @@ public class OptionsMenu extends AppCompatActivity {
     }
 
     //
-    public void createView(Class name, String token) {
+    public void createView(Class<?> name, String token) {
 
         Intent i = new Intent(this, name);
         i.putExtra("token", token);

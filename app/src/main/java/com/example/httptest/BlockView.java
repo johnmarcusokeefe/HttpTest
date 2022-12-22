@@ -25,9 +25,6 @@ import java.util.List;
 
 public class BlockView extends OptionsMenu {
 
-    private ListView listView;
-    private ArrayList<Block> blockList;
-
     public BlockView() {
     }
 
@@ -36,18 +33,20 @@ public class BlockView extends OptionsMenu {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_block_view);
 
-        listView=findViewById(block_list);
-        BlockControl bc = new BlockControl();
-        
-        if(bc.flag){
+        ListView listView = findViewById(block_list);
+        //
+        String url = "https://okka.com.au/driverlog_rest/blocks.php";
+        // getters and setters are used to access the stream data
+        Boolean flag = HttpStreamControl.httpRequest(url);
+        //
+        if(flag){
              // may have to check if returned
             JSONObject r = HttpStreamControl.getJsonResult();
             // returns json
             try {
                 // jsonarray
-                blockList = new ArrayList<>();
+                ArrayList<Block> blockList = new ArrayList<>();
                 JSONArray blocks = r.getJSONArray("blocks");
-                System.out.println("blockview " + blocks.length());
                 int end = blocks.length();
                 //
                 String line;
