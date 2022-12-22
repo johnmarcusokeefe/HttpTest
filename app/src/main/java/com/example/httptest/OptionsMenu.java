@@ -46,7 +46,7 @@ public class OptionsMenu extends AppCompatActivity {
     }
 
     //
-    public void createView(Class<?> name, String token) {
+    public void createView(Class name, String token) {
 
         Intent i = new Intent(this, name);
         i.putExtra("token", token);
